@@ -3,10 +3,12 @@ import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import { createBrowserHistory } from 'history'
 import analyticsMiddleware from './middleware/analytics'
+import PostsReducer from './reducers/posts'
 
 export const history = createBrowserHistory()
 
 const combinedReducers = combineReducers({
+    PostsReducer
 })
 
 const initialState = {}
