@@ -23,7 +23,9 @@ class Screen extends React.Component {
                 className={classnames(this.props.className, styles.screen)}
                 ref={this.wrapper}
             >
-                {this.props.children}
+                <div className={ styles.inner }>
+                    {this.props.children}
+                </div>
             </div>
         )
     }
