@@ -6,7 +6,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import BlogListView from './BlogListView'
 import BlogDetailsView from './BlogDetailsView'
 
-const TIMEOUT = 2400
+const TIMEOUT = 600
 const TRANSITION_CLASS = 'route-transition'
 
 const ScreenTransition = ({

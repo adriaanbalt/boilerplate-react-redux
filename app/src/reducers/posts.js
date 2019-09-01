@@ -2,14 +2,16 @@
   src/reducers/posts.js
 */
 const initialState = {
-    posts: {
-        '001': {
+    posts: [
+        {
+            id: '001',
             title: "Post 001"
         },
-        '002': {
+        {
+            id: '002',
             title: "Post 002"
         },
-    }
+    ]
 }
 export default (state = initialState, action) => {
     switch (action.type) {
