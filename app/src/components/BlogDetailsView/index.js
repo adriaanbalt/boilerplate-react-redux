@@ -5,6 +5,7 @@ import { bindActionCreators, compose } from 'redux'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 import withScreen from '../../hoc/withScreen'
+import getPost from '../../selectors/getPost';
 
 /**
  * @class BlogDetailsView
@@ -23,6 +24,7 @@ class BlogDetailsView extends Component {
 }
 
 const mapStateToProps = state => ({
+    post: getPost( state )
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
