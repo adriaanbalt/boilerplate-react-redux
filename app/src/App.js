@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
-import BlogListView from './BlogListView'
-import BlogDetailsView from './BlogDetailsView'
+import BlogListView from './components/BlogListView'
+import BlogDetailsView from './components/BlogDetailsView'
 
-const TIMEOUT = 2400
+const TIMEOUT = 600
 const TRANSITION_CLASS = 'route-transition'
 
 const ScreenTransition = ({
