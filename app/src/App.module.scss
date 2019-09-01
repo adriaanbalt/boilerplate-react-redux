@@ -1,21 +1,4 @@
-@import './variables.scss';
 
 .App {
   text-align: center;
-}
-:global {
-  .route-transition-enter {
-    opacity: 0;
-  }
-  .route-transition-enter-active {
-    opacity: 1;
-    @include screen-transition;
-  }
-  .route-transition-exit {
-    opacity: 1;
-  }
-  .route-transition-exit-active {
-    opacity: 0;
-    @include screen-transition;
-  }
 }
