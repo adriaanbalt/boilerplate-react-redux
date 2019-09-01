@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './styles.css';
+import styles from './styles.module.scss';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
@@ -18,7 +18,7 @@ class BlogDetailsView extends Component {
 
     render() {
         return (
-            <div className="BlogDetailsView">
+            <div className={styles["BlogDetailsView"]}>
                 <h1>DETAIL</h1>
                 <Link to="/">Home</Link>
             </div>
