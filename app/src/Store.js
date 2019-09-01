@@ -2,7 +2,7 @@ import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import { createBrowserHistory } from 'history'
-// import analyticsMiddleware from './middleware/analyticsMiddleware'
+import analyticsMiddleware from './middleware/analytics'
 
 export const history = createBrowserHistory()
 
@@ -14,7 +14,7 @@ const enhancers = []
 const middleware = [
     thunk,
     routerMiddleware(history),
-    // analyticsMiddleware,
+    analyticsMiddleware,
 ]
 
 // Enable redux dev tools in development
