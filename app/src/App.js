@@ -1,24 +1,76 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { Route, Switch, withRouter } from 'react-router-dom'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
+
+import BlogListView from './BlogListView'
+import BlogDetailsView from './BlogDetailsView'
+
+// import './App.scss'
 import styles from './App.module.scss';
 
-function App() {
+console.log('styles', styles)
+
+const TIMEOUT = 2400
+const TRANSITION_CLASS = 'route-transition'
+
+const ScreenTransition = ({
+  animationKey,
+  children,
+  noTimeout,
+  appear = false, /* should the transition play when the screen is initially mounted (i.e. the app's initial screen)? */
+}) => {
   return (
-    <div className={styles.App}>
-      <header className={styles["App-header"]}>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <TransitionGroup>
+      <CSSTransition
+        key={animationKey}
+        timeout={noTimeout ? TIMEOUT : TIMEOUT}
+        classNames={TRANSITION_CLASS}
+        appear={appear}
+      >
+        {children}
+      </CSSTransition>
+    </TransitionGroup>
+  )
 }
 
-export default App;
+/**
+ * @class App
+ * @extends {Component}
+ */
+class App extends Component {
+  render() {
+    const { location } = this.props
+    return (
+      <React.Fragment>
+        <Switch location={location}>
+          <Route exact
+            path={`/`}
+            render={
+              () => (
+                <ScreenTransition animationKey={location.key}>
+                  <BlogListView />
+                </ScreenTransition>
+              )
+            }
+          />
+          <Route
+            path={`/details/:id`}
+            render={
+              () => (
+                <ScreenTransition animationKey={location.key}>
+                  <BlogDetailsView />
+                </ScreenTransition>
+              )
+            }
+          />
+        </Switch>
+      </React.Fragment>
+    );
+  }
+}
+
+export default withRouter(connect(
+  null,
+  null,
+)(App))

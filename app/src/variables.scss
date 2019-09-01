@@ -1,0 +1,8 @@
+$routeTransitionDuration: 600ms;
+$minAppHeight: 1vh;
+$route-cubic-bezier: cubic-bezier(.59,0,.61,.98);
+
+@mixin screen-transition {
+  transition: opacity $routeTransitionDuration $route-cubic-bezier;
+  will-change: transition, opacity;
+}
