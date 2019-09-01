@@ -14,17 +14,21 @@ import getPost from '../../selectors/getPost';
 class BlogDetailsView extends Component {
 
     render() {
+        console.log( "blog details view", this.props)
+        const {
+            title
+        } = this.props.post
         return (
             <div className={classnames("screen", styles["BlogDetailsView"])}>
-                <h1>DETAIL</h1>
+                <h1>{title}</h1>
                 <Link to="/">Home</Link>
             </div>
         );
     }
 }
 
-const mapStateToProps = state => ({
-    post: getPost( state )
+const mapStateToProps = (state, ownProps) => ({
+    post: getPost( state, ownProps )
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
