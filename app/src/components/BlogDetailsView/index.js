@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import styles from './styles.module.scss';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
+import { bindActionCreators, compose } from 'redux'
 import { Link } from 'react-router-dom'
+import classnames from 'classnames'
+import withScreen from '../../hoc/withScreen'
 
 /**
  * @class BlogDetailsView
@@ -11,9 +13,8 @@ import { Link } from 'react-router-dom'
 class BlogDetailsView extends Component {
 
     render() {
-        console.log( 'blog details view', this.props)
         return (
-            <div className={styles["BlogDetailsView"]}>
+            <div className={classnames("screen", styles["BlogDetailsView"])}>
                 <h1>DETAIL</h1>
                 <Link to="/">Home</Link>
             </div>
@@ -27,4 +28,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => bindActionCreators({
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(BlogDetailsView);
+export default compose(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    ),
+    (component) => withScreen(component, 'from-left'),
+)(BlogDetailsView)

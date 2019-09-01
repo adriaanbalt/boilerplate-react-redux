@@ -1,0 +1,8 @@
+.screen {
+  height: 100vh;
+
+  :global(.is-mobile) & {
+    //the var vh is passed by JS in FullHeightScreen.js
+    height: calc(var(--vh, 1vh) * 100);
+  }
+}
