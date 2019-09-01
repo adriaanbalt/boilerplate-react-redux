@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
@@ -49,17 +50,24 @@ class App extends Component {
               render={
                 () => (
                   <ScreenTransition animationKey={location.key}>
-                    <BlogListView />
+                    <BlogListView {...this.props} />
                   </ScreenTransition>
                 )
               }
             />
-            <Route
+            <Route exact
               path={`/details/:id`}
               render={
+                // using render() because this enables animating between screens (see above ScreenTransition wrapper)
+                // @see https://reacttraining.com/react-router/web/api/Route/render-func
+                // @see https://github.com/ReactTraining/react-router/issues/5870
+                // however, when using render() the query params are not passed to the child component
+                // this being the case, you must pass this.props down
+                // unfortunately match.params will still not provide the :id as expected
+                // you will need to deconstruct the url within the child component
                 () => (
                   <ScreenTransition animationKey={location.key}>
-                    <BlogDetailsView />
+                    <BlogDetailsView {...this.props} />
                   </ScreenTransition>
                 )
               }
@@ -71,7 +79,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(connect(
-  null,
-  null,
-)(App))
+export default withRouter(App)
