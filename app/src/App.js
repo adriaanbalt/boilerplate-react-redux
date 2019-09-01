@@ -6,11 +6,6 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import BlogListView from './BlogListView'
 import BlogDetailsView from './BlogDetailsView'
 
-// import './App.scss'
-import styles from './App.module.scss';
-
-console.log('styles', styles)
-
 const TIMEOUT = 2400
 const TRANSITION_CLASS = 'route-transition'
 
