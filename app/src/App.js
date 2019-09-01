@@ -3,8 +3,11 @@ import { connect } from 'react-redux'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
+import Header from './components/Header'
 import BlogListView from './components/BlogListView'
 import BlogDetailsView from './components/BlogDetailsView'
+
+import styles from './App.module.scss'
 
 const TIMEOUT = 600
 const TRANSITION_CLASS = 'route-transition'
@@ -38,28 +41,31 @@ class App extends Component {
     const { location } = this.props
     return (
       <React.Fragment>
-        <Switch location={location}>
-          <Route exact
-            path={`/`}
-            render={
-              () => (
-                <ScreenTransition animationKey={location.key}>
-                  <BlogListView />
-                </ScreenTransition>
-              )
-            }
-          />
-          <Route
-            path={`/details/:id`}
-            render={
-              () => (
-                <ScreenTransition animationKey={location.key}>
-                  <BlogDetailsView />
-                </ScreenTransition>
-              )
-            }
-          />
-        </Switch>
+        <Header />
+        <div className={styles.ScreenContainer}>
+          <Switch location={location}>
+            <Route exact
+              path={`/`}
+              render={
+                () => (
+                  <ScreenTransition animationKey={location.key}>
+                    <BlogListView />
+                  </ScreenTransition>
+                )
+              }
+            />
+            <Route
+              path={`/details/:id`}
+              render={
+                () => (
+                  <ScreenTransition animationKey={location.key}>
+                    <BlogDetailsView />
+                  </ScreenTransition>
+                )
+              }
+            />
+          </Switch>
+        </div>
       </React.Fragment>
     );
   }
