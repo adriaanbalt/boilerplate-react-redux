@@ -4,19 +4,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
-const mapStateToProps = state => ({
-})
-
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-}, dispatch)
-
 /**
- * @class App
+ * @class BlogDetailsView
  * @extends {Component}
  */
 class BlogDetailsView extends Component {
 
     render() {
+        console.log( 'blog details view', this.props)
         return (
             <div className={styles["BlogDetailsView"]}>
                 <h1>DETAIL</h1>
@@ -25,5 +20,11 @@ class BlogDetailsView extends Component {
         );
     }
 }
+
+const mapStateToProps = state => ({
+})
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(BlogDetailsView);

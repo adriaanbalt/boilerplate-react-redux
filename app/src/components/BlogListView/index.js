@@ -9,7 +9,7 @@ const BlogListViewItem = ({ title, id }) => (
 )
 
 /**
- * @class App
+ * @class BlogListView
  * @extends {Component}
  */
 class BlogListView extends Component {
