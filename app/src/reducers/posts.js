@@ -47,13 +47,32 @@ const initialState = {
         },
         '005': {
             id: '005',
-            title: "River",
+            title: "Trees River",
             timeToRead: 3,
             created: 1413345600,
             videoId: "2SaOEUZQ2G8",
             thumbnail: "https://images.unsplash.com/photo-1455577380025-4321f1e1dca7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
             favorite: false,
         },
+        '006': {
+            id: '006',
+            title: "Canyon River",
+            timeToRead: 3,
+            created: 1413345600,
+            videoId: "2SaOEUZQ2G8",
+            thumbnail: "https://images.unsplash.com/photo-1506355683710-bd071c0a5828?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+            favorite: false,
+        },
+        '007': {
+            id: '007',
+            title: "River and Mountains",
+            timeToRead: 3,
+            created: 1413345600,
+            videoId: "2SaOEUZQ2G8",
+            thumbnail: "https://images.unsplash.com/photo-1494783329112-4a6795291178?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+            favorite: false,
+        },
+        
     },
 }
 export default (state = initialState, action) => {
