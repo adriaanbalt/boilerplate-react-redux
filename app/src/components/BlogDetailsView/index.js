@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux'
-import { Link } from 'react-router-dom'
+import YouTube from 'react-youtube';
+import { IoIosArrowDown } from 'react-icons/io';
 import withScreen from '../../hoc/withScreen'
 import getPost from '../../selectors/getPost';
-import YouTube from 'react-youtube';
 
 import styles from './styles.module.scss';
 
 import {
     toggleFavorite
 } from '../../actions'
+import FavoriteHeart from '../FavoriteHeart';
 
 /**
  * @class BlogDetailsView
@@ -26,33 +27,40 @@ class BlogDetailsView extends Component {
                 thumbnail,
                 videoId,
                 timeToRead,
+                body,
+                favorite,
             },
             toggleFavorite,
         } = this.props; 
         return (
-            <div className={styles["BlogDetailsView"]}>
-                <div>
-                    <h1>{title}</h1>
-                    <div onClick={ () => toggleFavorite( id ) }>Add to Favorites</div>
-                    <div>{`${timeToRead} min to read`}</div>
-                    <Link to="/">Home</Link>
-                </div>
-                <div>
-                    <YouTube 
-                        videoId={videoId}
-                        opts={{
-                            height: '390',
-                            width: '640',
-                            playerVars: { // https://developers.google.com/youtube/player_parameters
-                                autoplay: 0
-                            }
-                        }}
-                        onReady={this._onReady} />
-                </div>
-                <div>
-                    <img src={thumbnail} />
-                </div>
-            </div>
+            <section className={styles["BlogDetailsView"]}>
+                <header>
+                        <div className={styles.headerItem}>
+                            <h1>{title}</h1>
+                            <FavoriteHeart id={id} favorite={favorite} toggleFavorite={toggleFavorite} size={30}/>
+                            <div>{`${timeToRead} min to read`}</div>
+                            <IoIosArrowDown className={styles.arrowDownIcon } size={32}/>
+                        </div>
+                        <div className={styles.headerItem}>
+                            <img src={thumbnail} />
+                        </div>
+                </header>
+                <article className={styles.videoContainer}>
+                    <div>
+                        <YouTube
+                            videoId={videoId}
+                            opts={{
+                                height: '390',
+                                width: '640',
+                                playerVars: { // https://developers.google.com/youtube/player_parameters
+                                    autoplay: 0
+                                }
+                            }}
+                            onReady={this._onReady} />
+                    </div>
+                </article>
+                <article className={styles.body} dangerouslySetInnerHTML={{ __html: body }}></article>
+            </section>
         );
     }
 }

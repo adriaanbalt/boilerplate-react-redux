@@ -27,7 +27,7 @@ const ScreenTransition = ({
       <CSSTransition
         key={animationKey}
         timeout={noTimeout ? TIMEOUT : TIMEOUT}
-        classNames={TRANSITION_CLASS}
+        className={TRANSITION_CLASS}
         appear={appear}
       >
         {children}

@@ -1,0 +1,9 @@
+@import '../../globalStyles/variables.scss';
+.favoriteContainer {
+    display: inline-block;
+    color: $color-heart;
+    &:hover {
+        color: $color-heart-hover;
+        transform: scale(1.1);
+    }
+}

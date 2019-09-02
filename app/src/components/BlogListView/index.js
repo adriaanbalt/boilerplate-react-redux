@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
-import styles from './styles.module.scss';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux'
 import { Link } from 'react-router-dom'
-import withScreen from '../../hoc/withScreen'
-import { IoIosHeart, IoIosHeartEmpty } from 'react-icons/io';
 import Moment from 'moment'
 
+import withScreen from '../../hoc/withScreen'
+import FavoriteHeart from '../FavoriteHeart';
 import {
     toggleFavorite
 } from '../../actions'
 
+import styles from './styles.module.scss';
 
 const BlogListViewItem = ({ title, id, thumbnail, favorite, toggleFavorite, created, timeToRead }) => {
     const momentDate = Moment.unix( created )
     return (
-        <div className={styles.listItem}>
+        <article className={styles.listItem}>
             <Link to={`/details/${id}`}>
                 <div className={styles.imgContainer}>
                     <img src={thumbnail}/>
@@ -34,19 +34,8 @@ const BlogListViewItem = ({ title, id, thumbnail, favorite, toggleFavorite, crea
                     </div>
                 </div>
             </Link>
-            <span className={ styles.favoriteContainer } onClick={() => toggleFavorite(id)}>
-            {
-                !favorite
-                &&
-                <IoIosHeartEmpty size={20}/>
-            }
-            {
-                favorite
-                &&
-                <IoIosHeart size={20}/>
-            }
-            </span>
-        </div>
+            <FavoriteHeart id={id} favorite={favorite} toggleFavorite={toggleFavorite} size={20} />
+        </article>
     )
 }
 
@@ -59,7 +48,7 @@ class BlogListView extends Component {
     render() {
         const { posts, toggleFavorite, sort, searchResults } = this.props
         return (
-            <div className={styles.BlogListView}>
+            <section className={styles.BlogListView}>
                 <div className={styles.listContainer}>
                 {
                     // converting to an array from an object of keys
@@ -94,7 +83,7 @@ class BlogListView extends Component {
                         })
                 }
                 </div>
-            </div>
+            </section>
         );
     }
 }
