@@ -17,29 +17,33 @@ const BlogListViewItem = ({ title, id, thumbnail, favorite, toggleFavorite, crea
     return (
         <div className={styles.listItem}>
             <Link to={`/details/${id}`}>
+                <div className={styles.imgContainer}>
+                    <img src={thumbnail}/>
+                </div>
                 <h2>{title}</h2>
-                <div>
-                    {
-                        momentDate.format('MMMM D, YYYY')
-                    }
+                <div className={styles.bottom}>
+                    <div>
+                        {
+                            momentDate.format('MMMM D, YYYY')
+                        }
+                    </div>
+                    <div>
+                        {
+                            `${timeToRead} min to read`
+                        }
+                    </div>
                 </div>
-                <div>
-                    {
-                        `${timeToRead} min to read`
-                    }
-                </div>
-                <img src={thumbnail}/>
             </Link>
-            <span style={{ color: 'red' }} onClick={() => toggleFavorite(id)}>
+            <span className={ styles.favoriteContainer } onClick={() => toggleFavorite(id)}>
             {
                 !favorite
                 &&
-                <IoIosHeartEmpty />
+                <IoIosHeartEmpty size={20}/>
             }
             {
                 favorite
                 &&
-                <IoIosHeart />
+                <IoIosHeart size={20}/>
             }
             </span>
         </div>
