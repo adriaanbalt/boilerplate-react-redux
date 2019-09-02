@@ -41,18 +41,18 @@ const ScreenTransition = ({
  * @extends {Component}
  */
 class App extends Component {
-
-  componentWillMount = () => {
-    // there could be a loader here
+  
+  componentDidMount = () => {
     this.appLoaded()
   }
+
   appLoaded = () => {
     // this happens on first mount of the app (this could be after a loader)
     // create search index
     // need to convert the object version of the posts into an array to be manipulated by the search index
     SearchSetup.createFromData( Object.entries(this.props.posts).map(post=>post[1]) )
   }
-
+  
   render() {
     const { 
       location, 

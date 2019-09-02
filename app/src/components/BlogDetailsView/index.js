@@ -23,8 +23,8 @@ class BlogDetailsView extends Component {
             post: {
                 id,
                 title,
-                image,
-                videoYoutubeId,
+                thumbnail,
+                videoId,
             },
             toggleFavorite,
         } = this.props; 
@@ -37,7 +37,7 @@ class BlogDetailsView extends Component {
                 </div>
                 <div>
                     <YouTube 
-                        videoId={videoYoutubeId}
+                        videoId={videoId}
                         opts={{
                             height: '390',
                             width: '640',
@@ -48,7 +48,7 @@ class BlogDetailsView extends Component {
                         onReady={this._onReady} />
                 </div>
                 <div>
-                    <img src={image} />
+                    <img src={thumbnail} />
                 </div>
             </div>
         );
