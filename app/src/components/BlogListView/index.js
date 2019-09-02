@@ -11,7 +11,7 @@ import {
 } from '../../actions'
 
 
-const BlogListViewItem = ({ title, id, image, favorite, toggleFavorite }) => (
+const BlogListViewItem = ({ title, id, thumbnail, favorite, toggleFavorite }) => (
     <div className={styles.listItem} >
         <Link to={`/details/${id}`}>{title}</Link>
         <span style={{ color: 'red' }} onClick={() => toggleFavorite(id) }>
@@ -26,7 +26,7 @@ const BlogListViewItem = ({ title, id, image, favorite, toggleFavorite }) => (
             <IoIosHeart />
         }
         </span>
-        <img src={image}/>
+        <img src={thumbnail}/>
     </div>
 )
 
@@ -49,23 +49,31 @@ class BlogListView extends Component {
                     // i've been trying this technique more recently when I've been handling hundreds of thousands of data entries (still on the fence but I'm kind of liking it at this time)
                     Object.entries(posts)
                         .filter( post => {
+                            // search
                             if ( searchResults.length ) {
+                                // filter if there are search results
                                 return searchResults.indexOf(post[1].id) >= 0
                             } else {
+                                // if there are no results then show all posts
                                 return true
                             }
                         })
                         .sort( (a,b) => {
                             // sort 
                             if ( sort.sortOptions[sort.selected].type === 'number' ) {
-                                return a[1][sort.selected] - b[1][sort.selected] // comparing numbers (like chronological order or how long it takes to read the article)
+                                // comparing numbers (like chronological order or how long it takes to read the article)
+                                return a[1][sort.selected] - b[1][sort.selected] 
                             } else if ( sort.sortOptions[sort.selected].type === 'letter' ) {
-                                return a[1][sort.selected] > b[1][sort.selected] // order by the title alphabeticall
+                                console.log('letter', sort.selected, a[1][sort.selected], b[1][sort.selected], a[1][sort.selected] < b[1][sort.selected])
+                                // order by the title alphabeticall
+                                return a[1][sort.selected] > b[1][sort.selected] ? 1 : -1
                             } else if (sort.sortOptions[sort.selected].type === 'boolean') {
-                                return b[1][sort.selected] - a[1][sort.selected] // order by boolean, like by favorite (flipped versus number because we want true to be first)
+                                // order by boolean, like by favorite (flipped versus number because we want true to be first)
+                                return b[1][sort.selected] - a[1][sort.selected] 
                             }
                         })
                         .map((post, index) => {
+                            console.log('post', post[1].title)
                             // post is an object of (key, value) @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
                             return <BlogListViewItem key={`key-BlogListViewItem-${index}`} {...post[1]} toggleFavorite={toggleFavorite} />
                         })

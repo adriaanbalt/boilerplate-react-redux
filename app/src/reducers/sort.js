@@ -10,8 +10,8 @@ const initialState = {
             label: "Alphabetical", // what the user sees in the dropdown
             type: "letter", // the type of sort (used by the List View to make the comparable function more dynamic based on the data)
         },
-        "chronological": { 
-            id: "chronological", // unique Id without spaces to be used as the "selected" property in this reducer
+        "created": { 
+            id: "created", // unique Id without spaces to be used as the "selected" property in this reducer
             label: "Chronological", // what the user sees in the dropdown
             type: "number", // the type of sort (used by the List View to make the comparable function more dynamic based on the data)
         },
@@ -20,18 +20,13 @@ const initialState = {
             label: "Time to Read", // what the user sees in the dropdown
             type: "number", // the type of sort (used by the List View to make the comparable function more dynamic based on the data)
         },
-        "hasVideo": { 
-            id: "hasVideo", // unique Id without spaces to be used as the "selected" property in this reducer
-            label: "Has Video?", // what the user sees in the dropdown
-            type: "boolean", // the type of sort (used by the List View to make the comparable function more dynamic based on the data)
-        },
        "favorite":  {
             id: "favorite", // unique Id without spaces to be used as the "selected" property in this reducer
             label: "Favorite", // what the user sees in the dropdown
             type: "boolean", // the type of sort (used by the List View to make the comparable function more dynamic based on the data)
         },
     },
-    selected: "timeToRead"
+    selected: "title"
 }
 export default (state = initialState, action) => {
     switch (action.type) {
