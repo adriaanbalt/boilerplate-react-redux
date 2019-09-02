@@ -47,7 +47,7 @@ class App extends Component {
       selectSortOption, } = this.props
     return (
       <React.Fragment>
-        <Header sort={{ sortOptions: sortOptions, handleSortChange: selectSortOption}}/>
+        <Header sort={{ sortOptions: Object.entries(sortOptions).map( option => option[1] ), handleSortChange: selectSortOption}}/>
         <div className={styles.ScreenContainer}>
           <Switch location={location}>
             <Route exact

@@ -37,7 +37,7 @@ const BlogListViewItem = ({ title, id, image, favorite, toggleFavorite }) => (
 class BlogListView extends Component {
 
     render() {
-        const { toggleFavorite } = this.props
+        const { posts, toggleFavorite, sort, } = this.props
         return (
             <div className={styles.BlogListView}>
                 <h1>List View</h1>
@@ -47,10 +47,21 @@ class BlogListView extends Component {
                     // we can talk about this in person but the idea here is to reduce lookups with javascript cached data
                     // ideally data is downloaded once and cached, then the frontend can look it up quickly if the data is objects
                     // i've been trying this technique more recently when I've been handling hundreds of thousands of data entries (still on the fence but I'm kind of liking it at this time)
-                    Object.entries(this.props.posts).map((post, index) => {
-                        // post is an object of (key, value) @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
-                        return <BlogListViewItem key={`key-BlogListViewItem-${index}`} {...post[1]} toggleFavorite={toggleFavorite} />
-                    })
+                    Object.entries(posts)
+                        .sort( (a,b) => {
+                            console.log('sort.sortOptions[sort.selected] ', sort.selected, a[1][sort.selected] )
+                            if ( sort.sortOptions[sort.selected].type === 'number' ) {
+                                return a[1][sort.selected] - b[1][sort.selected] // comparing numbers (like chronological order or how long it takes to read the article)
+                            } else if ( sort.sortOptions[sort.selected].type === 'letter' ) {
+                                return a[1][sort.selected] > b[1][sort.selected] // order by the title alphabeticall
+                            } else if (sort.sortOptions[sort.selected].type === 'boolean') {
+                                return b[1][sort.selected] - a[1][sort.selected]// order by boolean, like by favorite
+                            }
+                        })
+                        .map((post, index) => {
+                            // post is an object of (key, value) @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
+                            return <BlogListViewItem key={`key-BlogListViewItem-${index}`} {...post[1]} toggleFavorite={toggleFavorite} />
+                        })
                 }
                 </div>
             </div>
@@ -60,6 +71,7 @@ class BlogListView extends Component {
 
 const mapStateToProps = state => ({
     posts: state.PostsReducer.posts,
+    sort: state.SortReducer,
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
