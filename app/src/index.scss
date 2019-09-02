@@ -1,28 +1,6 @@
 @import './globalStyles/reset.scss';
 @import './globalStyles/variables.scss';
-
-html {
-   font-size: 1em;
-}
-body {
-  margin: 0;
-  font-family: "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.route-transition-enter {
-  opacity: 0;
-}
-.route-transition-enter-active {
-  opacity: 1;
-  @include screen-transition;
-}
-.route-transition-exit {
-  opacity: 1;
-}
-.route-transition-exit-active {
-  opacity: 0;
-  @include screen-transition;
-}
+@import './globalStyles/mixins.scss';
+@import './globalStyles/fonts.scss';
+@import './globalStyles/screenTransitions.scss';
+@import './globalStyles/universal.scss';

@@ -2,7 +2,6 @@ $routeTransitionDuration: 600ms;
 $minAppHeight: 1vh;
 $route-cubic-bezier: cubic-bezier(.59,0,.61,.98);
 
-@mixin screen-transition {
-  transition: opacity $routeTransitionDuration $route-cubic-bezier;
-  will-change: transition, opacity;
-}
+$color-site-bg: #f1f1f1;
+$color-list-item-bg: #fff;
+$color-font-dark: #111;
