@@ -21,7 +21,7 @@ const BlogListViewItem = ({ title, id, thumbnail, favorite, toggleFavorite, crea
         <article className={styles.listItem}>
             <Link to={`/details/${id}`}>
                 <div className={styles.imgContainer}>
-                    <img src={thumbnail}/>
+                    <img src={thumbnail} alt={title}/>
                 </div>
                 <h2>{title}</h2>
                 <div className={styles.bottom}>
@@ -54,13 +54,14 @@ class BlogListView extends Component {
             toggleFavorite, 
             sort, 
             searchResults,
+            selectSortOption,
         } = this.props
         //  sort={{ sortOptions: Object.entries(sortOptions).map( option => option[1] ), handleSortChange: selectSortOption}}
         return (
             <section className={styles.BlogListView}>
                 <div>
                     <span>Sort:</span>
-                    <DropDown handleChange={sort.handleSortChange} value={sort.value}>
+                    <DropDown handleChange={selectSortOption} value={sort.value}>
                         {
                             Object.entries(sort.sortOptions).map( option => option[1] ).map((option, index) => {
                                 return <option key={`sort-option-${index}`} value={option.id}>{option.label}</option>
@@ -69,7 +70,6 @@ class BlogListView extends Component {
                     </DropDown>
                 </div>
                 <div>
-                    <span>Search:</span>
                     <Search />
                 </div>
                 <div className={styles.listContainer}>
@@ -99,6 +99,7 @@ class BlogListView extends Component {
                                 // order by the title alphabeticall
                                 return a[1][sort.selected] > b[1][sort.selected] ? 1 : -1
                             }
+                            return 1;
                         })
                         .map((post, index) => {
                             // post is an object of (key, value) @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries

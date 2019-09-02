@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux'
 import YouTube from 'react-youtube';
 import { IoIosArrowDown } from 'react-icons/io';
+import Moment from 'moment'
+
 import withScreen from '../../hoc/withScreen'
 import getPost from '../../selectors/getPost';
-
 import styles from './styles.module.scss';
 
 import {
@@ -29,20 +30,27 @@ class BlogDetailsView extends Component {
                 timeToRead,
                 body,
                 favorite,
+                created,
             },
             toggleFavorite,
-        } = this.props; 
+        } = this.props;
+        const momentDate = Moment.unix(created)
         return (
             <section className={styles["BlogDetailsView"]}>
                 <header>
                         <div className={styles.headerItem}>
                             <h1>{title}</h1>
                             <FavoriteHeart id={id} favorite={favorite} toggleFavorite={toggleFavorite} size={30}/>
+                            <div className={styles.date}>
+                            {
+                                momentDate.format('MMMM D, YYYY')
+                            }
+                            </div>
                             <div>{`${timeToRead} min to read`}</div>
                             <IoIosArrowDown className={styles.arrowDownIcon } size={32}/>
                         </div>
                         <div className={styles.headerItem}>
-                            <img src={thumbnail} />
+                            <img src={thumbnail} alt={title} />
                         </div>
                 </header>
                 <article className={styles.videoContainer}>

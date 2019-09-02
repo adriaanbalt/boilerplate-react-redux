@@ -1,2 +1,24 @@
-.search {
+@import '../../globalStyles/variables.scss';
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+}
+.inputContainer {
+    display: inline-block;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: $color-font-dark;
+}
+.input {
+    padding: .25em;
+    background: transparent;
+    border: transparent;
+    font-size: 1em;
+    &:focus{
+        outline: none;
+    }
+}
+.icon {
+    display: inline-block;
 }

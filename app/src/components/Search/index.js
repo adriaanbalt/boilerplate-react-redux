@@ -35,13 +35,15 @@ class Search extends Component {
             performSearch,
         } = this.props
         return (
-            <div>
+            <div className={styles.searchContainer}>
                 <div onClick={() => {
                     performSearch( this.state.value )
                 }} className={styles.icon}>
-                    <IoIosSearch />
+                    <IoIosSearch size={32}/>
                 </div>
-                <input type="text" className={styles.text} placeholder={this.state.value || 'Search'} onKeyPress={this.keyPress} onChange={this.handleChange} />
+                <div className={styles.inputContainer}>
+                    <input type="text" className={styles.input} placeholder={this.state.value || 'Search'} onKeyPress={this.keyPress} onChange={this.handleChange} />
+                </div>
             </div>
         );
     }
