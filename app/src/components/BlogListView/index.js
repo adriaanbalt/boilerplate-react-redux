@@ -5,30 +5,39 @@ import { bindActionCreators, compose } from 'redux'
 import { Link } from 'react-router-dom'
 import withScreen from '../../hoc/withScreen'
 import { IoIosHeart, IoIosHeartEmpty } from 'react-icons/io';
+import Moment from 'moment'
 
 import {
     toggleFavorite
 } from '../../actions'
 
 
-const BlogListViewItem = ({ title, id, thumbnail, favorite, toggleFavorite }) => (
-    <div className={styles.listItem} >
-        <Link to={`/details/${id}`}>{title}</Link>
-        <span style={{ color: 'red' }} onClick={() => toggleFavorite(id) }>
-        {
-            !favorite
-            &&
-            <IoIosHeartEmpty/>
-        }
-        {
-            favorite
-            &&
-            <IoIosHeart />
-        }
-        </span>
-        <img src={thumbnail}/>
-    </div>
-)
+const BlogListViewItem = ({ title, id, thumbnail, favorite, toggleFavorite, created }) => {
+    const momentDate = Moment.unix( created )
+    return (
+        <div className={styles.listItem} >
+            <Link to={`/details/${id}`}>{title}</Link>
+            <span style={{ color: 'red' }} onClick={() => toggleFavorite(id) }>
+            {
+                !favorite
+                &&
+                <IoIosHeartEmpty/>
+            }
+            {
+                favorite
+                &&
+                <IoIosHeart />
+            }
+            </span>
+            <div>
+                {
+                    momentDate.format('MMMM D, YYYY')
+                }
+            </div>
+            <img src={thumbnail}/>
+        </div>
+    )
+}
 
 /**
  * @class BlogListView
@@ -60,20 +69,16 @@ class BlogListView extends Component {
                         })
                         .sort( (a,b) => {
                             // sort 
-                            if ( sort.sortOptions[sort.selected].type === 'number' ) {
+                            if ( sort.sortOptions[sort.selected].type === 'number' || sort.sortOptions[sort.selected].type === 'boolean' ) {
                                 // comparing numbers (like chronological order or how long it takes to read the article)
-                                return a[1][sort.selected] - b[1][sort.selected] 
-                            } else if ( sort.sortOptions[sort.selected].type === 'letter' ) {
-                                console.log('letter', sort.selected, a[1][sort.selected], b[1][sort.selected], a[1][sort.selected] < b[1][sort.selected])
-                                // order by the title alphabeticall
-                                return a[1][sort.selected] > b[1][sort.selected] ? 1 : -1
-                            } else if (sort.sortOptions[sort.selected].type === 'boolean') {
                                 // order by boolean, like by favorite (flipped versus number because we want true to be first)
                                 return b[1][sort.selected] - a[1][sort.selected] 
+                            } else if ( sort.sortOptions[sort.selected].type === 'letter' ) {
+                                // order by the title alphabeticall
+                                return a[1][sort.selected] > b[1][sort.selected] ? 1 : -1
                             }
                         })
                         .map((post, index) => {
-                            console.log('post', post[1].title)
                             // post is an object of (key, value) @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
                             return <BlogListViewItem key={`key-BlogListViewItem-${index}`} {...post[1]} toggleFavorite={toggleFavorite} />
                         })
