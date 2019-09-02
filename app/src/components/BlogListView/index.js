@@ -12,7 +12,7 @@ import {
 } from '../../actions'
 
 
-const BlogListViewItem = ({ title, id, thumbnail, favorite, toggleFavorite, created }) => {
+const BlogListViewItem = ({ title, id, thumbnail, favorite, toggleFavorite, created, timeToRead }) => {
     const momentDate = Moment.unix( created )
     return (
         <div className={styles.listItem} >
@@ -32,6 +32,11 @@ const BlogListViewItem = ({ title, id, thumbnail, favorite, toggleFavorite, crea
             <div>
                 {
                     momentDate.format('MMMM D, YYYY')
+                }
+            </div>
+            <div>
+                {
+                    `${timeToRead} min to read`
                 }
             </div>
             <img src={thumbnail}/>
