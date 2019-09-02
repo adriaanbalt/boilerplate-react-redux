@@ -25,6 +25,7 @@ class BlogDetailsView extends Component {
                 title,
                 thumbnail,
                 videoId,
+                timeToRead,
             },
             toggleFavorite,
         } = this.props; 
@@ -33,6 +34,7 @@ class BlogDetailsView extends Component {
                 <div>
                     <h1>{title}</h1>
                     <div onClick={ () => toggleFavorite( id ) }>Add to Favorites</div>
+                    <div>{`${timeToRead} min to read`}</div>
                     <Link to="/">Home</Link>
                 </div>
                 <div>

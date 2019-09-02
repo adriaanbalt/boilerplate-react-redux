@@ -15,13 +15,26 @@ import {
 const BlogListViewItem = ({ title, id, thumbnail, favorite, toggleFavorite, created, timeToRead }) => {
     const momentDate = Moment.unix( created )
     return (
-        <div className={styles.listItem} >
-            <Link to={`/details/${id}`}>{title}</Link>
-            <span style={{ color: 'red' }} onClick={() => toggleFavorite(id) }>
+        <div className={styles.listItem}>
+            <Link to={`/details/${id}`}>
+                <h2>{title}</h2>
+                <div>
+                    {
+                        momentDate.format('MMMM D, YYYY')
+                    }
+                </div>
+                <div>
+                    {
+                        `${timeToRead} min to read`
+                    }
+                </div>
+                <img src={thumbnail}/>
+            </Link>
+            <span style={{ color: 'red' }} onClick={() => toggleFavorite(id)}>
             {
                 !favorite
                 &&
-                <IoIosHeartEmpty/>
+                <IoIosHeartEmpty />
             }
             {
                 favorite
@@ -29,17 +42,6 @@ const BlogListViewItem = ({ title, id, thumbnail, favorite, toggleFavorite, crea
                 <IoIosHeart />
             }
             </span>
-            <div>
-                {
-                    momentDate.format('MMMM D, YYYY')
-                }
-            </div>
-            <div>
-                {
-                    `${timeToRead} min to read`
-                }
-            </div>
-            <img src={thumbnail}/>
         </div>
     )
 }
@@ -54,7 +56,6 @@ class BlogListView extends Component {
         const { posts, toggleFavorite, sort, searchResults } = this.props
         return (
             <div className={styles.BlogListView}>
-                <h1>List View</h1>
                 <div className={styles.listContainer}>
                 {
                     // converting to an array from an object of keys
