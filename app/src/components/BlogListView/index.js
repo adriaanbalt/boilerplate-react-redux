@@ -1,16 +1,19 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux'
 import { Link } from 'react-router-dom'
 import Moment from 'moment'
 
 import withScreen from '../../hoc/withScreen'
-import FavoriteHeart from '../FavoriteHeart';
+import FavoriteHeart from '../FavoriteHeart'
+import DropDown from '../DropDown'
+import Search from '../Search'
 import {
-    toggleFavorite
+    toggleFavorite,
+    selectSortOption,
 } from '../../actions'
 
-import styles from './styles.module.scss';
+import styles from './styles.module.scss'
 
 const BlogListViewItem = ({ title, id, thumbnail, favorite, toggleFavorite, created, timeToRead }) => {
     const momentDate = Moment.unix( created )
@@ -46,9 +49,29 @@ const BlogListViewItem = ({ title, id, thumbnail, favorite, toggleFavorite, crea
 class BlogListView extends Component {
 
     render() {
-        const { posts, toggleFavorite, sort, searchResults } = this.props
+        const { 
+            posts, 
+            toggleFavorite, 
+            sort, 
+            searchResults,
+        } = this.props
+        //  sort={{ sortOptions: Object.entries(sortOptions).map( option => option[1] ), handleSortChange: selectSortOption}}
         return (
             <section className={styles.BlogListView}>
+                <div>
+                    <span>Sort:</span>
+                    <DropDown handleChange={sort.handleSortChange} value={sort.value}>
+                        {
+                            Object.entries(sort.sortOptions).map( option => option[1] ).map((option, index) => {
+                                return <option key={`sort-option-${index}`} value={option.id}>{option.label}</option>
+                            })
+                        }
+                    </DropDown>
+                </div>
+                <div>
+                    <span>Search:</span>
+                    <Search />
+                </div>
                 <div className={styles.listContainer}>
                 {
                     // converting to an array from an object of keys
@@ -84,7 +107,7 @@ class BlogListView extends Component {
                 }
                 </div>
             </section>
-        );
+        )
     }
 }
 
@@ -96,6 +119,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     toggleFavorite,
+    selectSortOption,
 }, dispatch)
 
 export default compose(

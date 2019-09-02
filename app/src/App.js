@@ -10,7 +10,6 @@ import BlogDetailsView from './components/BlogDetailsView'
 
 import styles from './App.module.scss'
 
-import { selectSortOption } from './actions'
 import SearchSetup from './components/Search/setup';
 
 const TIMEOUT = 600
@@ -55,13 +54,11 @@ class App extends Component {
   
   render() {
     const { 
-      location, 
-      sortOptions, 
-      selectSortOption, 
+      location,
     } = this.props
     return (
       <React.Fragment>
-        <Header sort={{ sortOptions: Object.entries(sortOptions).map( option => option[1] ), handleSortChange: selectSortOption}}/>
+        <Header/>
         <div className={styles.ScreenContainer}>
           <Switch location={location}>
             <Route exact
@@ -100,11 +97,9 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   posts: state.PostsReducer.posts,
-  sortOptions: state.SortReducer.sortOptions,
 })
 
 const mapDispatchToProps = ( dispatch ) => bindActionCreators({
-  selectSortOption
 }, dispatch )
 
 export default withRouter( connect(
