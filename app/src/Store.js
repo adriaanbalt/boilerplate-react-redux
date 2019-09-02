@@ -4,11 +4,13 @@ import thunk from 'redux-thunk'
 import { createBrowserHistory } from 'history'
 import analyticsMiddleware from './middleware/analytics'
 import PostsReducer from './reducers/posts'
+import SortReducer from './reducers/sort'
 
 export const history = createBrowserHistory()
 
 const combinedReducers = combineReducers({
-    PostsReducer
+    PostsReducer,
+    SortReducer,
 })
 
 const initialState = {}

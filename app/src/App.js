@@ -10,6 +10,8 @@ import BlogDetailsView from './components/BlogDetailsView'
 
 import styles from './App.module.scss'
 
+import { selectSortOption } from './actions'
+
 const TIMEOUT = 600
 const TRANSITION_CLASS = 'route-transition'
 
@@ -39,10 +41,13 @@ const ScreenTransition = ({
  */
 class App extends Component {
   render() {
-    const { location } = this.props
+    const { 
+      location, 
+      sortOptions, 
+      selectSortOption, } = this.props
     return (
       <React.Fragment>
-        <Header />
+        <Header sort={{ sortOptions: sortOptions, handleSortChange: selectSortOption}}/>
         <div className={styles.ScreenContainer}>
           <Switch location={location}>
             <Route exact
@@ -79,4 +84,15 @@ class App extends Component {
   }
 }
 
-export default withRouter(App)
+const mapStateToProps = state => ({
+  sortOptions: state.SortReducer.sortOptions,
+})
+
+const mapDispatchToProps = ( dispatch ) => bindActionCreators({
+  selectSortOption
+}, dispatch )
+
+export default withRouter( connect(
+  mapStateToProps,
+  mapDispatchToProps
+)( App ))
