@@ -10,6 +10,7 @@ class SearchSetup {
     createFromData = (data) => {
         this.idx = lunr( function() {
             this.field('title')
+            this.field('body')
             data.forEach( (doc) => {
                 this.add(doc)
             }, this)
