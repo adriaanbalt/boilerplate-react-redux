@@ -11,6 +11,7 @@ import BlogDetailsView from './components/BlogDetailsView'
 import styles from './App.module.scss'
 
 import { selectSortOption } from './actions'
+import SearchSetup from './components/Search/setup';
 
 const TIMEOUT = 600
 const TRANSITION_CLASS = 'route-transition'
@@ -40,11 +41,24 @@ const ScreenTransition = ({
  * @extends {Component}
  */
 class App extends Component {
+
+  componentWillMount = () => {
+    // there could be a loader here
+    this.appLoaded()
+  }
+  appLoaded = () => {
+    // this happens on first mount of the app (this could be after a loader)
+    // create search index
+    // need to convert the object version of the posts into an array to be manipulated by the search index
+    SearchSetup.createFromData( Object.entries(this.props.posts).map(post=>post[1]) )
+  }
+
   render() {
     const { 
       location, 
       sortOptions, 
-      selectSortOption, } = this.props
+      selectSortOption, 
+    } = this.props
     return (
       <React.Fragment>
         <Header sort={{ sortOptions: Object.entries(sortOptions).map( option => option[1] ), handleSortChange: selectSortOption}}/>
@@ -85,6 +99,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
+  posts: state.PostsReducer.posts,
   sortOptions: state.SortReducer.sortOptions,
 })
 

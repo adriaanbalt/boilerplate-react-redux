@@ -20,7 +20,7 @@ const initialState = {
         },
         '002': {
             id: '002',
-            title: "Mountains and more mountains",
+            title: "Mountains and more great mountains",
             timeToRead: 15,
             created: "",
             videoYoutubeId: "5yvHqXhMPss",

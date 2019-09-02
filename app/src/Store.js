@@ -5,12 +5,14 @@ import { createBrowserHistory } from 'history'
 import analyticsMiddleware from './middleware/analytics'
 import PostsReducer from './reducers/posts'
 import SortReducer from './reducers/sort'
+import SearchReducer from './reducers/search'
 
 export const history = createBrowserHistory()
 
 const combinedReducers = combineReducers({
     PostsReducer,
     SortReducer,
+    SearchReducer,
 })
 
 const initialState = {}

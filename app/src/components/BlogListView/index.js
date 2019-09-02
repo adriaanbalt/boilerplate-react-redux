@@ -37,7 +37,7 @@ const BlogListViewItem = ({ title, id, image, favorite, toggleFavorite }) => (
 class BlogListView extends Component {
 
     render() {
-        const { posts, toggleFavorite, sort, } = this.props
+        const { posts, toggleFavorite, sort, searchResults } = this.props
         return (
             <div className={styles.BlogListView}>
                 <h1>List View</h1>
@@ -48,14 +48,21 @@ class BlogListView extends Component {
                     // ideally data is downloaded once and cached, then the frontend can look it up quickly if the data is objects
                     // i've been trying this technique more recently when I've been handling hundreds of thousands of data entries (still on the fence but I'm kind of liking it at this time)
                     Object.entries(posts)
+                        .filter( post => {
+                            if ( searchResults.length ) {
+                                return searchResults.indexOf(post[1].id) >= 0
+                            } else {
+                                return true
+                            }
+                        })
                         .sort( (a,b) => {
-                            console.log('sort.sortOptions[sort.selected] ', sort.selected, a[1][sort.selected] )
+                            // sort 
                             if ( sort.sortOptions[sort.selected].type === 'number' ) {
                                 return a[1][sort.selected] - b[1][sort.selected] // comparing numbers (like chronological order or how long it takes to read the article)
                             } else if ( sort.sortOptions[sort.selected].type === 'letter' ) {
                                 return a[1][sort.selected] > b[1][sort.selected] // order by the title alphabeticall
                             } else if (sort.sortOptions[sort.selected].type === 'boolean') {
-                                return b[1][sort.selected] - a[1][sort.selected]// order by boolean, like by favorite
+                                return b[1][sort.selected] - a[1][sort.selected] // order by boolean, like by favorite (flipped versus number because we want true to be first)
                             }
                         })
                         .map((post, index) => {
@@ -72,6 +79,7 @@ class BlogListView extends Component {
 const mapStateToProps = state => ({
     posts: state.PostsReducer.posts,
     sort: state.SortReducer,
+    searchResults: state.SearchReducer.results,
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

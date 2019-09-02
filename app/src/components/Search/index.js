@@ -1,14 +1,54 @@
-import React from 'react'
-import styles from './styles.module.scss'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import {
+    performSearch
+} from '../../actions'
+import { IoIosSearch } from 'react-icons/io';
 
-export default ({value, handleChange}) => (
-    <div>
-        <div onClick={() => {
-            if (value) {
-                // this.props.onSubmit(this.state.text)
-            }
-        }} className={styles.icon}>
-        </div>
-        <input type="text" className={styles.text} placeholder={value || 'Search'} value={value} onChange={handleChange} />
-    </div>
-)
+import styles from './styles.module.scss';
+
+/**
+ * @class Search
+ * @extends {Component}
+ */
+class Search extends Component {
+
+    state = {
+        value: ''
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            value: e.target.value,
+        })
+    }
+
+    render() {
+        const { 
+            performSearch,
+        } = this.props
+        return (
+            <div>
+                <div onClick={() => {
+                    performSearch( this.state.value )
+                }} className={styles.icon}>
+                    <IoIosSearch />
+                </div>
+                <input type="text" className={styles.text} placeholder={this.state.value || 'Search'} onChange={this.handleChange} />
+            </div>
+        );
+    }
+}
+
+const mapStateToProps = state => ({
+})
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    performSearch,
+}, dispatch)
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Search)
