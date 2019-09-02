@@ -5,15 +5,15 @@ import { SELECT_SORT_OPTION } from "../actions";
 */
 const initialState = {
     sortOptions: { // converted to an object so the selected ID can be used to lookup the sort type quickly rather than looping over the entire array each time a selection is made, in exchange I have to loop over the entries and reformat the data in App.js
+        "created": {
+            id: "created", // unique Id without spaces to be used as the "selected" property in this reducer
+            label: "Chronological", // what the user sees in the dropdown
+            type: "number", // the type of sort (used by the List View to make the comparable function more dynamic based on the data)
+        },
         "title": { 
             id: "title", // unique Id without spaces to be used as the "selected" property in this reducer
             label: "Alphabetical", // what the user sees in the dropdown
             type: "letter", // the type of sort (used by the List View to make the comparable function more dynamic based on the data)
-        },
-        "created": { 
-            id: "created", // unique Id without spaces to be used as the "selected" property in this reducer
-            label: "Chronological", // what the user sees in the dropdown
-            type: "number", // the type of sort (used by the List View to make the comparable function more dynamic based on the data)
         },
         "timeToRead": { 
             id: "timeToRead", // unique Id without spaces to be used as the "selected" property in this reducer
@@ -26,7 +26,7 @@ const initialState = {
             type: "boolean", // the type of sort (used by the List View to make the comparable function more dynamic based on the data)
         },
     },
-    selected: "title"
+    selected: "created"
 }
 export default (state = initialState, action) => {
     switch (action.type) {
