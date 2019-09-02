@@ -1,3 +1,14 @@
 .BlogListView {
     background: #0f0;
+    .listContainer{
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .listItem {
+        position: relative;
+        width: 50%;
+        img { 
+            width: 100%;
+        }
+    }
 }

@@ -9,5 +9,5 @@ const selectPostFromParams = (state, props) => {
 
 export default createSelector(
     [getPosts, selectPostFromParams],
-    (posts, id) => posts.filter( post => post.id === id )[0]
+    (posts, id) => posts[id] // this is where the look up is O(1) (if posts is an array then this would need to be a filter() or loop over the data set) (one could argue that this is a stupid preformance boost but I'm trying to do micro optimizations)
 )

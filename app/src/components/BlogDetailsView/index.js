@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import styles from './styles.module.scss';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux'
 import { Link } from 'react-router-dom'
-import classnames from 'classnames'
 import withScreen from '../../hoc/withScreen'
 import getPost from '../../selectors/getPost';
+import YouTube from 'react-youtube';
+
+import styles from './styles.module.scss';
+
+import {
+    toggleFavorite
+} from '../../actions'
 
 /**
  * @class BlogDetailsView
@@ -14,14 +19,37 @@ import getPost from '../../selectors/getPost';
 class BlogDetailsView extends Component {
 
     render() {
-        console.log( "blog details view", this.props)
         const {
-            title
-        } = this.props.post
+            post: {
+                id,
+                title,
+                image,
+                videoYoutubeId,
+            },
+            toggleFavorite,
+        } = this.props; 
         return (
-            <div className={classnames("screen", styles["BlogDetailsView"])}>
-                <h1>{title}</h1>
-                <Link to="/">Home</Link>
+            <div className={styles["BlogDetailsView"]}>
+                <div>
+                    <h1>{title}</h1>
+                    <div onClick={ () => toggleFavorite( id ) }>Add to Favorites</div>
+                    <Link to="/">Home</Link>
+                </div>
+                <div>
+                    <YouTube 
+                        videoId={videoYoutubeId}
+                        opts={{
+                            height: '390',
+                            width: '640',
+                            playerVars: { // https://developers.google.com/youtube/player_parameters
+                                autoplay: 0
+                            }
+                        }}
+                        onReady={this._onReady} />
+                </div>
+                <div>
+                    <img src={image} />
+                </div>
             </div>
         );
     }
@@ -32,6 +60,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
+    toggleFavorite,
 }, dispatch)
 
 export default compose(

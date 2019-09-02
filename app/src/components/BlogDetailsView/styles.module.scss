@@ -1,3 +1,8 @@
 .BlogDetailsView {
     background: #f0f;
+    display: flex;
+    justify-content: space-around;
+    img {
+        width: 100%;
+    }
 }
