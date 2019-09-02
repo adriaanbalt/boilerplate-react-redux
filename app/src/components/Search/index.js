@@ -24,6 +24,12 @@ class Search extends Component {
         })
     }
 
+    keyPress = (e) => {
+        if ( e.key === "Enter" ){
+            this.props.performSearch( this.state.value )
+        }
+    }
+
     render() {
         const { 
             performSearch,
@@ -35,7 +41,7 @@ class Search extends Component {
                 }} className={styles.icon}>
                     <IoIosSearch />
                 </div>
-                <input type="text" className={styles.text} placeholder={this.state.value || 'Search'} onChange={this.handleChange} />
+                <input type="text" className={styles.text} placeholder={this.state.value || 'Search'} onKeyPress={this.keyPress} onChange={this.handleChange} />
             </div>
         );
     }
