@@ -10,6 +10,7 @@ import {
  */
 const sendEvent = (data, ml = null) => {
     // Analytics.track({
+    //     // some universal data
     //     data,
     // })
 }
