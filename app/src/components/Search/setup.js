@@ -3,10 +3,6 @@ import lunr from 'lunr'
 
 class SearchSetup {
 
-    getInstance = () => {
-        return this
-    }
-
     createFromData = (data) => {
         this.idx = lunr( function() {
             this.field('title')
@@ -15,6 +11,7 @@ class SearchSetup {
                 this.add(doc)
             }, this)
         })
+        return this.idx
     }
 
     performSearch = (query) => {
