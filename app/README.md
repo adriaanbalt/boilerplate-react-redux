@@ -1,10 +1,21 @@
-# Hello!  My name is Adriaan Balt and I built this blog platform from scratch using [Create React App](https://github.com/facebook/create-react-app) in about 8-10 working hours.
+# Hello!  My name is Adriaan Balt and I built this blog platform from scratch using [Create React App](https://github.com/facebook/create-react-app) in about 10 working hours.
 
 ## You can find more information about me at:
-* [website](http://www.adriaanbalt.com) 
-* [resume](http://www.adriaanbalt.com/assets/Adriaan-Balt-resume.pdf)
+* [Website](http://www.adriaanbalt.com) 
+* [Resume](http://www.adriaanbalt.com/assets/Adriaan-Balt-resume.pdf)
 * [LinkedIn profile](https://linkedin.com/in/adriaanbalt) 
 * [Github profile](https://github.com/adriaanbalt)
+
+## Files and Folders explanation
+* `/globalStyles` is where universal files are located.  They are loaded into /index.scss which does not include `module` in its name so it does not act like a css module.
+* React directives can be found in the `/components` folder, including the screens themselves as their helper directives like `Search` or `DropDown`
+* There is an analytics middleware that is able to catch each action that is performed.  As you can see in that file, some actions have been chosen to dispatch analytics events to the server (there is no server but this is where that functionality would exist)
+* Using HOC to have inheritance between the screens, which helps with the animations as well as the responsiveness of the app.  If I had more time I would further flesh out the animations.
+* The data is stored within the `reducers` folder and is combined together in the `Store.js` file.
+* Selectors are used to memoize and quickly retrieve state.
+* Actions are available across the app located in the `actions` folder.
+* The blog posts are located in `/app/src/reducers/posts.js`.  You can add or update them there.  If there was a backend, this reducer would be hydrated by the backend service.
+* I made the blog posts an object because it would allow for faster look ups rather than searching through arrays in various circumstances.  I could have taken the array approach but I like to try O(1) whenever I can.
 
 ## Things I would have liked to get to:
 * Flesh out the i18n helper to make the hard coded copy easier to translate
@@ -15,7 +26,6 @@
 * A backend possibly built with Node
 * The ability to make comments on the posts
 * Add analyzer to review bundle sizes
-
 
 ## Strange things
 * There is a warning from router but the creators of React Router haven't fixed it yet, not sure why that is the case. [See more here](https://github.com/ReactTraining/react-router/issues/6382)
