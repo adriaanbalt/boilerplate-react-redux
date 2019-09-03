@@ -2,6 +2,7 @@ import { PERFORM_SEARCH } from "../actions";
 
 const initialState = {
     results: [],
+    query: '',
 }
 export default (state = initialState, action) => {
     switch (action.type) {
