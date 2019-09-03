@@ -39,7 +39,7 @@ class Search extends Component {
                 <div onClick={() => {
                     performSearch( this.state.value )
                 }} className={styles.icon}>
-                    <IoIosSearch size={32}/>
+                    <IoIosSearch size={20}/>
                 </div>
                 <div className={styles.inputContainer}>
                     <input type="text" className={styles.input} placeholder={this.state.value || 'Search'} onKeyPress={this.keyPress} onChange={this.handleChange} />

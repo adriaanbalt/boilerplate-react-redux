@@ -1,21 +1,22 @@
+@import '../../globalStyles/variables.scss';
+
 .BlogDetailsView {
     header {
-        display: -webkit-flex;
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
         overflow: hidden;
-        height: 95vh;
+        height: auto;
         position: relative;
+        margin: 1em 0;
+        display: block;
         .headerItem {
             text-align: center;
-            width: 50%;
-            padding: 1%;
+            width: 100%;
+            padding: 1em 0;
         }
         .date {
             margin: .5em 0;
         }
         .arrowDownIcon {
+            display: none;
             position: absolute;
             bottom: 1em;
             animation: bounce 2s infinite;
@@ -23,13 +24,18 @@
         h1 {
             margin: 0 0 .25em 0;
         }
+        .backBtn {
+            position: relative;
+            top: 0;
+            left: 1em;
+            display: flex;
+        }
     }
     .body {
         display: flex;
         flex-direction: column;
         align-items: center;
-        
-        width: 50%;
+        width: 95%;
         margin: 0 auto;
         text-align: left;
         p {
@@ -38,12 +44,45 @@
     }
     .videoContainer {
         text-align: center;
-        width: 50%;
+        width: 95%;
         margin: 2em auto 0 auto;
     }
     img {
         width: 100%;
     }
+    iframe {
+        width: 100%;
+    }
+
+
+    // Mediaqueries
+    @media ( min-width : $tabletWidth ){
+        header{
+            display: -webkit-flex;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            height: 95vh;
+            .arrowDownIcon {
+                text-align: center;
+                display: inline-block;
+            }
+            .backBtn {
+                position: absolute;
+            }
+            .headerItem {
+                width: 50%;
+                padding: 1%;
+            }
+        }
+        .videoContainer {
+            width: 50%;
+        }
+        .body {
+            width: 50%;
+        }
+    }
+
 }
 
 @keyframes bounce {

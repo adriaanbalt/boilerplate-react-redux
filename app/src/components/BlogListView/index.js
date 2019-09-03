@@ -23,18 +23,18 @@ const BlogListViewItem = ({ title, id, thumbnail, favorite, toggleFavorite, crea
                 <div className={styles.imgContainer}>
                     <img src={thumbnail} alt={title}/>
                 </div>
-                <h2>{title}</h2>
+                <h3>{title}</h3>
                 <div className={styles.bottom}>
-                    <div>
+                    <p>
                         {
                             momentDate.format('MMMM D, YYYY')
                         }
-                    </div>
-                    <div>
+                    </p>
+                    <p>
                         {
                             `${timeToRead} min to read`
                         }
-                    </div>
+                    </p>
                 </div>
             </Link>
             <FavoriteHeart id={id} favorite={favorite} toggleFavorite={toggleFavorite} size={20} />
@@ -56,21 +56,22 @@ class BlogListView extends Component {
             searchResults,
             selectSortOption,
         } = this.props
-        //  sort={{ sortOptions: Object.entries(sortOptions).map( option => option[1] ), handleSortChange: selectSortOption}}
         return (
             <section className={styles.BlogListView}>
-                <div>
-                    <span>Sort:</span>
-                    <DropDown handleChange={selectSortOption} value={sort.value}>
-                        {
-                            Object.entries(sort.sortOptions).map( option => option[1] ).map((option, index) => {
-                                return <option key={`sort-option-${index}`} value={option.id}>{option.label}</option>
-                            })
-                        }
-                    </DropDown>
-                </div>
-                <div>
-                    <Search />
+                <div className={styles.customizeOptions}>
+                    <div>
+                        <Search />
+                    </div>
+                    <div>
+                        <span>Sort:</span>
+                        <DropDown handleChange={selectSortOption} value={sort.value}>
+                            {
+                                Object.entries(sort.sortOptions).map( option => option[1] ).map((option, index) => {
+                                    return <option key={`sort-option-${index}`} value={option.id}>{option.label}</option>
+                                })
+                            }
+                        </DropDown>
+                    </div>
                 </div>
                 <div className={styles.listContainer}>
                 {
@@ -128,5 +129,5 @@ export default compose(
         mapStateToProps,
         mapDispatchToProps
     ),
-    (component) => withScreen(component, 'from-left'),
+    (component) => withScreen(component, 'from-left'), // this technique allows for custom transitions between screens
 )(BlogListView)

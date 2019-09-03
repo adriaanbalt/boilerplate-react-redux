@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux'
 import YouTube from 'react-youtube';
-import { IoIosArrowDown } from 'react-icons/io';
+import { IoIosArrowDown, IoIosArrowBack } from 'react-icons/io';
 import Moment from 'moment'
+import { Link } from 'react-router-dom'
 
 import withScreen from '../../hoc/withScreen'
 import getPost from '../../selectors/getPost';
@@ -47,6 +48,7 @@ class BlogDetailsView extends Component {
                             }
                             </div>
                             <div>{`${timeToRead} min to read`}</div>
+                            <Link className={styles.backBtn} to="/"><IoIosArrowBack size={20}/>Back</Link>
                             <IoIosArrowDown className={styles.arrowDownIcon } size={32}/>
                         </div>
                         <div className={styles.headerItem}>

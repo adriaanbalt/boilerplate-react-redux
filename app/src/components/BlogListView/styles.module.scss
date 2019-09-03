@@ -1,6 +1,14 @@
 @import '../../globalStyles/variables.scss';
 
 .BlogListView {
+    .customizeOptions {
+        display: flex;
+        flex-direction: row;
+        -webkit-flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        margin: 0 0 1em 0;
+    }
     .listContainer{
         display: -webkit-flex;
         display: flex;
@@ -15,9 +23,9 @@
         }
         .listItem{
             position:relative;
-            width: 29.33%;
+            width:100%;
             margin: 1%;
-            padding: 1%;
+            padding: 2%;
             background: $color-list-item-bg;
             text-align: center;
             border-radius: 1em;
@@ -27,7 +35,7 @@
                 display: block;
                 transition:all .8s;
             }
-            h2 {
+            h3 {
                 margin: .5em 0;
             }
             .bottom {
@@ -45,23 +53,22 @@
         }
     }
 
-    // Mediaqueries
-    @media ( max-width : 860px ){
-        // set to 2 row
-        .listContainer{
-            height:220vw;
-            .listItem{
-                width:44%;
-                padding: 2%
-            }
-        }
-    }
-    @media ( max-width : 667px ){
+    @media ( min-width : $mobileWidth ){
     // set to 1 row
         .listContainer{
             height:auto;
             .listItem{
-                width:100%;
+                width:44%;
+                padding: 1%
+            }
+        }
+    }
+    // Mediaqueries
+    @media ( min-width : $tabletWidth ){
+        // set to 2 row
+        .listContainer{
+            .listItem{
+                width: 29.33%;
             }
         }
     }
