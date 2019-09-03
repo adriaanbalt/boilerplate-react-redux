@@ -1,18 +1,21 @@
+import Analytics from '../lib/analytics'
 import {
     TOGGLE_FAVORITE,
     SELECT_SORT_OPTION,
     PERFORM_SEARCH,
 } from '../actions'
 
+
+
 /**
  * This wrapper function sends the data to the server
  * @param {Object} data the event data to send
  */
 const sendEvent = (data, ml = null) => {
-    // Analytics.track({
-    //     // some universal data
-    //     data,
-    // })
+    Analytics.track({
+        // some univeral constants
+        ...data
+    })
 }
 
 export default store => next => action => {
