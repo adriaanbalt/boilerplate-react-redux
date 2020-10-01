@@ -7,6 +7,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import Header from './components/Header'
 import BlogListView from './components/BlogListView'
 import BlogDetailsView from './components/BlogDetailsView'
+import Empty from './components/Empty';
 
 import styles from './App.module.scss'
 
@@ -40,7 +41,7 @@ const ScreenTransition = ({
  * @extends {Component}
  */
 class App extends Component {
-  
+
   componentDidMount = () => {
     this.appLoaded()
   }
@@ -49,16 +50,16 @@ class App extends Component {
     // this happens on first mount of the app (this could be after a loader)
     // create search index
     // need to convert the object version of the posts into an array to be manipulated by the search index
-    SearchSetup.createFromData( Object.entries(this.props.posts).map(post=>post[1]) )
+    SearchSetup.createFromData(Object.entries(this.props.posts).map(post => post[1]))
   }
-  
+
   render() {
-    const { 
+    const {
       location,
     } = this.props
     return (
       <React.Fragment>
-        <Header/>
+        <Header />
         <div className={styles.ScreenContainer}>
           <Switch location={location}>
             <Route exact
@@ -99,10 +100,10 @@ const mapStateToProps = state => ({
   posts: state.PostsReducer.posts,
 })
 
-const mapDispatchToProps = ( dispatch ) => bindActionCreators({
-}, dispatch )
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+}, dispatch)
 
-export default withRouter( connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)( App ))
+)(App))
